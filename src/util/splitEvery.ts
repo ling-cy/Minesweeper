@@ -1,4 +1,4 @@
-export const splitEvery = (n: number, arr: any[], insertEmpty?: boolean) => {
+export function splitEvery<T>(n: number, arr: T[]) {
   if (n <= 0 || arr.length === 0) return [];
 
   let result = [];
@@ -8,4 +8,4 @@ export const splitEvery = (n: number, arr: any[], insertEmpty?: boolean) => {
   }
 
   return result;
-};
+}
