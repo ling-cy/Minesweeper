@@ -1,12 +1,15 @@
+import { GameProvider } from 'contexts/GameContext';
 import React from 'react';
 import MineField from './components/molecules/MineField';
 
 const App = () => {
   return (
-    <div>
-      <h1>Minesweeper</h1>
-      <MineField />
-    </div>
+    <GameProvider>
+      <div>
+        <h1>Minesweeper</h1>
+        <MineField />
+      </div>
+    </GameProvider>
   );
 };
 
