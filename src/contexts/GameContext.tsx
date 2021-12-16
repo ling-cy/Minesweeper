@@ -1,13 +1,18 @@
 import React from 'react';
-import { splitEvery } from 'util/splitEvery';
-import { DIFFICULTY, GameStatus } from '../constants/game';
-import { generateField } from '../util/generateField';
+import { splitEvery } from '@util/splitEvery';
+import { DIFFICULTY, GameStatus } from '@constants/game';
+import { generateField } from '@util/generateField';
+import { revealSides } from '@util/revealSides';
 
 export const GameContext = React.createContext({});
 
-export const useGameContext = React.useContext(GameContext);
+export const useGameContext = () => React.useContext(GameContext);
 
-export const GameProvider = ({ children }: { children: React.ReactNode }) => {
+export const GameContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [difficulty, setDifficulty] = React.useState(DIFFICULTY.EASY);
   const { width, height, mine: mineNumber } = difficulty;
   const [gameField, setGameField] = React.useState(
@@ -41,7 +46,16 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <GameContext.Provider value={{ difficulty, setDifficulty, gameField }}>
+    <GameContext.Provider
+      value={{
+        difficulty,
+        setDifficulty,
+        gameField,
+        gameState,
+        revealedMap,
+        revealField,
+      }}
+    >
       {children}
     </GameContext.Provider>
   );

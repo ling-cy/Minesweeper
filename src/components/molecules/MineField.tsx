@@ -1,6 +1,6 @@
 import React from 'react';
-import { generateField } from '../../util/generateField';
-import MineButton from '../atoms/MineButton';
+import { generateField } from '@util/generateField';
+import MineButton from '@components/atoms/MineButton';
 
 const MineField = () => {
   return (

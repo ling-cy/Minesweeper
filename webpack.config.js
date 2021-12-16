@@ -2,12 +2,23 @@ const prod = process.env.NODE_ENV === 'production';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 module.exports = {
   mode: prod ? 'production' : 'development',
   entry: './src/index.tsx',
   output: {
-    path: __dirname + '/dist/',
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, './src/components/'),
+      '@contexts': path.resolve(__dirname, './src/contexts/'),
+      '@constants': path.resolve(__dirname, './src/constants/'),
+      '@util': path.resolve(__dirname, './src/util/'),
+    },
+    extensions: ['.ts', '.tsx', '.js', '.json'],
   },
   module: {
     rules: [

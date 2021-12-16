@@ -1,4 +1,4 @@
-const revealSides = (
+export const revealSides = (
   width: number,
   height: number,
   row: number,
