@@ -3,8 +3,22 @@ import { splitEvery } from '@util/splitEvery';
 import { DIFFICULTY, GameStatus } from '@constants/game';
 import { generateField } from '@util/generateField';
 import { revealSides } from '@util/revealSides';
+import { GameDifficulty } from 'types/game';
 
-export const GameContext = React.createContext({});
+type GameContextValueType = {
+  difficulty: GameDifficulty;
+  setDifficulty: (difficulty: GameDifficulty) => void;
+  gameField: number[][];
+  gameStatus: GameStatus;
+  revealedMap: boolean[][];
+  setReveal: (row: number, col: number, fromSide?: boolean) => void;
+  isLost: boolean;
+  isWon: boolean;
+};
+
+export const GameContext = React.createContext<GameContextValueType>(
+  {} as GameContextValueType,
+);
 
 export const useGameContext = () => React.useContext(GameContext);
 
@@ -18,7 +32,7 @@ export const GameContextProvider = ({
   const [gameField, setGameField] = React.useState(
     generateField(width * height, mineNumber, width),
   );
-  const [gameState, setGameState] = React.useState(GameStatus.Pending);
+  const [gameStatus, setGameStatus] = React.useState(GameStatus.Pending);
   const [revealedMap, setRevealedMap] = React.useState(
     splitEvery(
       width,
@@ -26,34 +40,50 @@ export const GameContextProvider = ({
     ),
   );
 
+  const isLost = gameStatus === GameStatus.Lost;
+  const isWon = gameStatus === GameStatus.Won;
+
   const revealField = (row: number, col: number) => {
     let map = [...revealedMap];
     map[row][col] = true;
-    setRevealedMap(prev => map);
+    setRevealedMap(_ => map);
   };
 
   const setReveal = (row: number, col: number, fromSide?: boolean) => {
-    switch (gameField[row][col]) {
-      case -1:
-        if (!fromSide) setGameState(GameStatus.Lost);
-        break;
-      case 0:
-        revealSides(width, height, row, col, setReveal);
-      default:
-        revealField(row, col);
-        break;
+    if (gameStatus === GameStatus.Pending) {
+      setGameStatus(GameStatus.Started);
+    }
+    if (!revealedMap[row][col]) {
+      switch (gameField[row][col]) {
+        case -1:
+          if (!fromSide) {
+            setGameStatus(GameStatus.Lost);
+            revealField(row, col);
+          }
+          break;
+        case 0:
+          revealField(row, col);
+          revealSides(width, height, row, col, setReveal);
+          break;
+        default:
+          revealField(row, col);
+          break;
+      }
     }
   };
 
+  console.log(revealedMap);
   return (
     <GameContext.Provider
       value={{
         difficulty,
         setDifficulty,
         gameField,
-        gameState,
+        gameStatus,
         revealedMap,
-        revealField,
+        setReveal,
+        isLost,
+        isWon,
       }}
     >
       {children}

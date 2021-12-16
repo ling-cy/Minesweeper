@@ -1,12 +1,14 @@
-import { GameContextProvider } from '@contexts/GameContext';
 import React from 'react';
-import MineField from '@components/molecules/MineField';
+import { GameContextProvider } from '@contexts/GameContext';
+import GamePage from '@page/GamePage';
 
-const App = () => (
-  <GameContextProvider>
-    <h1>Minesweeper</h1>
-    <MineField />
-  </GameContextProvider>
-);
+const App = () => {
+  return (
+    <GameContextProvider>
+      <h1>Minesweeper</h1>
+      <GamePage />
+    </GameContextProvider>
+  );
+};
 
 export default App;

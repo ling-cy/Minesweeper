@@ -1,6 +1,14 @@
 import React from 'react';
 
-const MineButton = ({ num }: { num: number }) => {
+const MineButton = ({
+  num,
+  revealed,
+  onReveal,
+}: {
+  num: number;
+  revealed: boolean;
+  onReveal: () => void;
+}) => {
   return (
     <div
       style={{
@@ -10,9 +18,11 @@ const MineButton = ({ num }: { num: number }) => {
         alignItems: 'center',
         justifyContent: 'center',
         border: '1px solid black',
+        color: revealed ? 'black' : '#EEE',
       }}
+      onClick={onReveal}
     >
-      <span>{num === -1 ? '*' : `${num}`}</span>
+      {<span>{num === -1 ? '*' : `${num}`}</span>}
     </div>
   );
 };

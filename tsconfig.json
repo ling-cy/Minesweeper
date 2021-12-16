@@ -19,7 +19,9 @@
       "@components/*": ["components/*"],
       "@contexts/*": ["contexts/*"],
       "@constants/*": ["constants/*"],
-      "@util/*": ["util/*"]
+      "@util/*": ["util/*"],
+      "@types/*": ["types/*"],
+      "@page/*": ["page/*"]
     }
   }
 }
