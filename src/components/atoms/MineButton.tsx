@@ -35,12 +35,9 @@ const MineButton = ({
     }
   }, [num, revealed]);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (disabled) {
-      return;
-    }
-    const isRightClick = 'button' in e && e.button === 2;
-    const isLeftClick = 'button' in e && e.button === 0;
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const isRightClick = e.button !== 0;
+    const isLeftClick = e.button === 0;
     if (isRightClick) {
       onFlag();
       console.log('right');
@@ -52,7 +49,7 @@ const MineButton = ({
   };
 
   return (
-    <div
+    <button
       style={{
         display: 'flex',
         width: '40px',
@@ -70,9 +67,10 @@ const MineButton = ({
           : 'white',
       }}
       onClick={handleClick}
+      disabled={disabled}
     >
       {content}
-    </div>
+    </button>
   );
 };
 
