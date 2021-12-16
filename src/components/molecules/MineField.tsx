@@ -1,19 +1,24 @@
 import React from 'react';
 import MineButton from '@components/atoms/MineButton';
+import { FieldStatus, GameStatus } from '@constants/game';
 
 const MineField = ({
   gameField,
-  revealedMap,
+  fieldStatus,
+  gameStatus,
   onReveal,
+  onFlag,
 }: {
   gameField: number[][];
-  revealedMap: boolean[][];
+  fieldStatus: FieldStatus[][];
+  gameStatus: GameStatus;
   onReveal: (row: number, col: number, fromSide?: boolean) => void;
+  onFlag: (row: number, col: number) => void;
 }) => {
   return (
     <>
       {!!gameField &&
-        !!revealedMap &&
+        !!fieldStatus &&
         gameField.map((row, rowId) => (
           <div
             key={`${rowId}-row`}
@@ -24,14 +29,26 @@ const MineField = ({
               minWidth: '200px',
             }}
           >
-            {row.map((sqNum, colId) => (
-              <MineButton
-                num={sqNum}
-                key={`${rowId}-${colId}`}
-                revealed={revealedMap[rowId][colId]}
-                onReveal={() => onReveal(rowId, colId)}
-              />
-            ))}
+            {row.map((fieldNum, colId) => {
+              const status = fieldStatus[rowId][colId];
+              const revealed =
+                status === FieldStatus.Revealed ||
+                (gameStatus === GameStatus.Lost && fieldNum === -1);
+              const disabled =
+                gameStatus === GameStatus.Lost || gameStatus === GameStatus.Won;
+              return (
+                <MineButton
+                  num={fieldNum}
+                  key={`${rowId}-${colId}`}
+                  revealed={revealed}
+                  flagged={status === FieldStatus.Flagged}
+                  last={status === FieldStatus.Last}
+                  onReveal={() => onReveal(rowId, colId)}
+                  onFlag={() => onFlag(rowId, colId)}
+                  disabled={disabled}
+                />
+              );
+            })}
           </div>
         ))}
     </>

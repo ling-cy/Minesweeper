@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { splitEvery } from '@util/splitEvery';
-import { DIFFICULTY, GameStatus } from '@constants/game';
+import { DIFFICULTY, GameStatus, FieldStatus } from '@constants/game';
 import { generateField } from '@util/generateField';
 import { revealSides } from '@util/revealSides';
 import { GameDifficulty } from 'types/game';
+
+// gameField: -1 = mine, 0 = no mine nearby, 1-8 = number of mine nearby
 
 type GameContextValueType = {
   difficulty: GameDifficulty;
   setDifficulty: (difficulty: GameDifficulty) => void;
   gameField: number[][];
-  gameStatus: GameStatus;
-  revealedMap: boolean[][];
+  fieldStatus: FieldStatus[][];
   setReveal: (row: number, col: number, fromSide?: boolean) => void;
+  setFlag: (row: number, col: number) => void;
+  gameStatus: GameStatus;
   isLost: boolean;
   isWon: boolean;
-  setFlag: (target: { row: number; col: number }) => void;
 };
 
 export const GameContext = React.createContext<GameContextValueType>(
@@ -34,10 +36,10 @@ export const GameContextProvider = ({
     generateField(width * height, mineNumber, width),
   );
   const [gameStatus, setGameStatus] = React.useState(GameStatus.Pending);
-  const [revealedMap, setRevealedMap] = React.useState(
+  const [fieldStatus, setFieldStatus] = React.useState<FieldStatus[][]>(
     splitEvery(
       width,
-      Array.from({ length: width * height }, _ => false),
+      Array.from({ length: width * height }, _ => FieldStatus.Untouched),
     ),
   );
   const [flagged, setFlagged] = React.useState<{ row: number; col: number }[]>(
@@ -47,30 +49,28 @@ export const GameContextProvider = ({
   const isLost = gameStatus === GameStatus.Lost;
   const isWon = gameStatus === GameStatus.Won;
 
-  const revealField = (row: number, col: number) => {
-    let map = [...revealedMap];
-    map[row][col] = true;
-    setRevealedMap(_ => map);
+  const changeFieldStatus = (row: number, col: number, status: FieldStatus) => {
+    let map = [...fieldStatus];
+    map[row][col] = status;
+    setFieldStatus(_ => map);
   };
 
   const setReveal = (row: number, col: number, fromSide?: boolean) => {
     if (gameStatus === GameStatus.Pending) {
       setGameStatus(GameStatus.Started);
     }
-    if (!revealedMap[row][col]) {
+    if (fieldStatus[row][col] === FieldStatus.Untouched) {
       switch (gameField[row][col]) {
         case -1:
           if (!fromSide) {
             setGameStatus(GameStatus.Lost);
-            revealField(row, col);
+            changeFieldStatus(row, col, FieldStatus.Last);
           }
           break;
         case 0:
-          revealField(row, col);
           revealSides(width, height, row, col, setReveal);
-          break;
         default:
-          revealField(row, col);
+          changeFieldStatus(row, col, FieldStatus.Revealed);
           break;
       }
     }
@@ -83,12 +83,12 @@ export const GameContextProvider = ({
     }, true);
 
   const allDodged =
-    height * width - mineNumber ===
-    revealedMap.reduce((prev, curr) => {
+    mineNumber ===
+    fieldStatus.reduce((prev, curr) => {
       return (
         prev +
         curr.reduce((rowPrev, rowCurr) => {
-          return rowCurr ? rowPrev + 1 : rowPrev;
+          return rowCurr !== FieldStatus.Revealed ? rowPrev + 1 : rowPrev;
         }, 0)
       );
     }, 0);
@@ -106,12 +106,12 @@ export const GameContextProvider = ({
         setDifficulty,
         gameField,
         gameStatus,
-        revealedMap,
+        fieldStatus,
         setReveal,
+        setFlag: (row: number, col: number) =>
+          changeFieldStatus(row, col, FieldStatus.Flagged),
         isLost,
         isWon,
-        setFlag: (target: { row: number; col: number }) =>
-          setFlagged([target, ...flagged]),
       }}
     >
       {children}

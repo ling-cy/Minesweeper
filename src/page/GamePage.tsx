@@ -3,13 +3,16 @@ import MineField from '@components/molecules/MineField';
 import { useGameContext } from '@contexts/GameContext';
 
 const GamePage = () => {
-  const { gameField, revealedMap, setReveal, gameStatus } = useGameContext();
+  const { gameField, fieldStatus, setReveal, gameStatus, setFlag } =
+    useGameContext();
   return (
     <>
       <MineField
         gameField={gameField}
-        revealedMap={revealedMap}
+        fieldStatus={fieldStatus}
         onReveal={setReveal}
+        onFlag={setFlag}
+        gameStatus={gameStatus}
       />
       <h4>{gameStatus}</h4>
     </>

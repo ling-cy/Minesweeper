@@ -24,3 +24,10 @@ export enum GameStatus {
   Lost = 'LOST',
   Won = 'WON',
 }
+
+export enum FieldStatus {
+  Untouched = 'UNTOUCHED',
+  Revealed = 'REVEALED',
+  Flagged = 'FLAGGED',
+  Last = 'LAST',
+}
