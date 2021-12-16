@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { splitEvery } from '@util/splitEvery';
 import { DIFFICULTY, GameStatus } from '@constants/game';
 import { generateField } from '@util/generateField';
@@ -14,6 +14,7 @@ type GameContextValueType = {
   setReveal: (row: number, col: number, fromSide?: boolean) => void;
   isLost: boolean;
   isWon: boolean;
+  setFlag: (target: { row: number; col: number }) => void;
 };
 
 export const GameContext = React.createContext<GameContextValueType>(
@@ -38,6 +39,9 @@ export const GameContextProvider = ({
       width,
       Array.from({ length: width * height }, _ => false),
     ),
+  );
+  const [flagged, setFlagged] = React.useState<{ row: number; col: number }[]>(
+    [],
   );
 
   const isLost = gameStatus === GameStatus.Lost;
@@ -72,7 +76,29 @@ export const GameContextProvider = ({
     }
   };
 
-  console.log(revealedMap);
+  const allFlagged =
+    flagged.length === mineNumber &&
+    flagged.reduce((allCorrect, flaggedSq) => {
+      return allCorrect && gameField[flaggedSq.row][flaggedSq.col] === -1;
+    }, true);
+
+  const allDodged =
+    height * width - mineNumber ===
+    revealedMap.reduce((prev, curr) => {
+      return (
+        prev +
+        curr.reduce((rowPrev, rowCurr) => {
+          return rowCurr ? rowPrev + 1 : rowPrev;
+        }, 0)
+      );
+    }, 0);
+
+  React.useEffect(() => {
+    if (gameStatus === GameStatus.Started && (allFlagged || allDodged)) {
+      setGameStatus(GameStatus.Won);
+    }
+  }, [allFlagged, allDodged]);
+
   return (
     <GameContext.Provider
       value={{
@@ -84,6 +110,8 @@ export const GameContextProvider = ({
         setReveal,
         isLost,
         isWon,
+        setFlag: (target: { row: number; col: number }) =>
+          setFlagged([target, ...flagged]),
       }}
     >
       {children}
