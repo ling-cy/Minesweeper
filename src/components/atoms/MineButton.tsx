@@ -36,15 +36,17 @@ const MineButton = ({
   }, [num, revealed]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const isRightClick = e.button !== 0;
-    const isLeftClick = e.button === 0;
-    if (isRightClick) {
-      onFlag();
-      console.log('right');
-    }
-    if (isLeftClick) {
+    if (e.button === 0) {
       onReveal();
-      console.log('left');
+    }
+  };
+
+  const handleContextMenu = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+    if (e.button !== 0) {
+      onFlag();
     }
   };
 
@@ -52,21 +54,25 @@ const MineButton = ({
     <button
       style={{
         display: 'flex',
-        width: '40px',
-        height: '40px',
+        width: '25px',
+        height: '25px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '1px solid black',
+        borderStyle: revealed ? 'outset' : 'solid',
+        borderTopWidth: revealed ? '1.5px' : '3px',
+        borderLeftWidth: revealed ? '1.5px' : '3px',
+        borderBottomWidth: revealed ? '0px' : '3px',
+        borderRightWidth: revealed ? '0px' : '3px',
+        borderTopColor: revealed ? 'rgb(125,125,125)' : 'white',
+        borderLeftColor: revealed ? 'rgb(125,125,125)' : 'white',
+        borderBottomColor: 'rgb(125,125,125)',
+        borderRightColor: 'rgb(125,125,125)',
         color: 'black',
-        backgroundColor: revealed
-          ? flagged
-            ? 'green'
-            : last
-            ? 'red'
-            : 'grey'
-          : 'white',
+        backgroundColor: flagged ? 'green' : last ? 'red' : 'rgb(198,198,198)',
+        fontSize: '12px',
       }}
       onClick={handleClick}
+      onContextMenu={handleContextMenu}
       disabled={disabled}
     >
       {content}

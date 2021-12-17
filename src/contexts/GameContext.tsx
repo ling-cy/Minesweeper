@@ -99,6 +99,13 @@ export const GameContextProvider = ({
     }
   }, [allFlagged, allDodged]);
 
+  const setFlag = (row: number, col: number) => {
+    if (fieldStatus[row][col] === FieldStatus.Untouched) {
+      changeFieldStatus(row, col, FieldStatus.Flagged);
+    } else if (fieldStatus[row][col] === FieldStatus.Flagged) {
+      changeFieldStatus(row, col, FieldStatus.Untouched);
+    }
+  };
   return (
     <GameContext.Provider
       value={{
@@ -108,8 +115,7 @@ export const GameContextProvider = ({
         gameStatus,
         fieldStatus,
         setReveal,
-        setFlag: (row: number, col: number) =>
-          changeFieldStatus(row, col, FieldStatus.Flagged),
+        setFlag,
         isLost,
         isWon,
       }}
