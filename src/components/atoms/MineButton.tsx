@@ -1,4 +1,5 @@
 import React from 'react';
+import { Mine } from '@assets/images';
 
 const MineButton = ({
   num,
@@ -26,7 +27,7 @@ const MineButton = ({
     } else {
       switch (num) {
         case -1:
-          return <span>*</span>;
+          return <img src={Mine} style={{ width: '26px', height: '26px' }} />;
         case 0:
           return;
         default:
@@ -54,22 +55,22 @@ const MineButton = ({
     <button
       style={{
         display: 'flex',
-        width: '25px',
-        height: '25px',
+        width: '36px',
+        height: '36px',
         alignItems: 'center',
         justifyContent: 'center',
         borderStyle: revealed ? 'outset' : 'solid',
-        borderTopWidth: revealed ? '1.5px' : '3px',
-        borderLeftWidth: revealed ? '1.5px' : '3px',
-        borderBottomWidth: revealed ? '0px' : '3px',
-        borderRightWidth: revealed ? '0px' : '3px',
+        borderTopWidth: revealed ? '2px' : '4px',
+        borderLeftWidth: revealed ? '2px' : '4px',
+        borderBottomWidth: revealed ? '0px' : '4px',
+        borderRightWidth: revealed ? '0px' : '4px',
         borderTopColor: revealed ? 'rgb(125,125,125)' : 'white',
         borderLeftColor: revealed ? 'rgb(125,125,125)' : 'white',
         borderBottomColor: 'rgb(125,125,125)',
         borderRightColor: 'rgb(125,125,125)',
         color: 'black',
         backgroundColor: flagged ? 'green' : last ? 'red' : 'rgb(198,198,198)',
-        fontSize: '12px',
+        fontSize: '24px',
       }}
       onClick={handleClick}
       onContextMenu={handleContextMenu}

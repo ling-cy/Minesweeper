@@ -19,6 +19,7 @@ module.exports = {
       '@util': path.resolve(__dirname, './src/util/'),
       '@types': path.resolve(__dirname, './src/types/'),
       '@page': path.resolve(__dirname, './src/page/'),
+      '@assets': path.resolve(__dirname, './src/assets/'),
     },
     extensions: ['.ts', '.tsx', '.js', '.json'],
   },
@@ -35,6 +36,14 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
       },
     ],
   },

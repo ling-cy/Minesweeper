@@ -4,7 +4,7 @@ import { useGameContext } from '@contexts/GameContext';
 import Timer from '@components/molecules/Timer';
 
 const GamePage = () => {
-  const { gameField, fieldStatus, setReveal, gameStatus, setFlag } =
+  const { gameField, fieldStatus, setReveal, gameStatus, setFlag, mineLeft } =
     useGameContext();
   return (
     <>
@@ -17,6 +17,7 @@ const GamePage = () => {
       />
       <h4>{gameStatus}</h4>
       <Timer gameStatus={gameStatus} />
+      <h4>Mine left: {mineLeft}</h4>
     </>
   );
 };

@@ -21,7 +21,8 @@
       "@constants/*": ["constants/*"],
       "@util/*": ["util/*"],
       "@types/*": ["types/*"],
-      "@page/*": ["page/*"]
+      "@page/*": ["page/*"],
+      "@assets/*": ["assets/*"]
     }
   }
 }
