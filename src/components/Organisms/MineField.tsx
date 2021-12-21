@@ -1,5 +1,5 @@
 import React from 'react';
-import MineButton from '@components/atoms/MineButton';
+import FieldSuare from '../molecules/FieldSquare';
 import { FieldStatus, GameStatus } from '@constants/game';
 
 const MineField = ({
@@ -37,7 +37,7 @@ const MineField = ({
               const disabled =
                 gameStatus === GameStatus.Lost || gameStatus === GameStatus.Won;
               return (
-                <MineButton
+                <FieldSuare
                   num={fieldNum}
                   key={`${rowId}-${colId}`}
                   revealed={revealed}

@@ -1,5 +1,5 @@
 import React from 'react';
-import MineField from '@components/molecules/MineField';
+import MineField from '@components/organisms/MineField';
 import { useGameContext } from '@contexts/GameContext';
 import Timer from '@components/molecules/Timer';
 import CounterNumber from '@components/atoms/CounterNumber';

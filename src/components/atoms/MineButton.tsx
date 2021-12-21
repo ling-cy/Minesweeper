@@ -1,41 +1,20 @@
 import React from 'react';
-import { Mine, Flag } from '@assets/images';
-import MineNumber from './MineNumber';
 
-const MineButton = ({
-  num,
+const FieldSuare = ({
   revealed,
-  flagged,
   onReveal,
   onFlag,
   disabled,
   last,
+  children,
 }: {
-  num: number;
   revealed: boolean;
-  flagged: boolean;
   onReveal: () => void;
   onFlag: () => void;
   disabled: boolean;
   last: boolean;
+  children?: React.ReactNode;
 }) => {
-  const content = React.useMemo(() => {
-    if (flagged) {
-      return <img src={Flag} style={{ width: '28px', height: '28px' }} />;
-    }
-    if (revealed) {
-      switch (num) {
-        case -1:
-          return <img src={Mine} style={{ width: '30px', height: '30px' }} />;
-        case 0:
-          return;
-        default:
-          return <MineNumber value={num} />;
-      }
-    }
-    return;
-  }, [num, revealed, flagged]);
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e.button === 0) {
       onReveal();
@@ -74,9 +53,9 @@ const MineButton = ({
       onContextMenu={handleContextMenu}
       disabled={disabled}
     >
-      {content}
+      {children}
     </button>
   );
 };
 
-export default MineButton;
+export default FieldSuare;
