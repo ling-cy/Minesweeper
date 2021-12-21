@@ -1,5 +1,6 @@
 import { GameStatus } from '@constants/game';
 import React from 'react';
+import CounterNumber from '../atoms/CounterNumber';
 
 const Timer = ({ gameStatus }: { gameStatus: GameStatus }) => {
   const [time, setTime] = React.useState(0);
@@ -19,7 +20,11 @@ const Timer = ({ gameStatus }: { gameStatus: GameStatus }) => {
     }
   }, [time, stop, gameStatus]);
 
-  return <div>{time}</div>;
+  return (
+    <div>
+      <CounterNumber value={time} usage="timer" />
+    </div>
+  );
 };
 
 export default Timer;

@@ -2,6 +2,7 @@ import React from 'react';
 import MineField from '@components/molecules/MineField';
 import { useGameContext } from '@contexts/GameContext';
 import Timer from '@components/molecules/Timer';
+import CounterNumber from '@components/atoms/CounterNumber';
 
 const GamePage = () => {
   const { gameField, fieldStatus, setReveal, gameStatus, setFlag, mineLeft } =
@@ -17,7 +18,8 @@ const GamePage = () => {
       />
       <h4>{gameStatus}</h4>
       <Timer gameStatus={gameStatus} />
-      <h4>Mine left: {mineLeft}</h4>
+      <h4>Mine left:</h4>
+      <CounterNumber value={mineLeft} usage="mineCounter" />
     </>
   );
 };
