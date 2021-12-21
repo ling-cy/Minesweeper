@@ -8,3 +8,4 @@ export const Seven = require('./counter_seven.svg');
 export const Eight = require('./counter_eight.svg');
 export const Nine = require('./counter_nine.svg');
 export const Zero = require('./counter_zero.svg');
+export const Negative = require('./counter_negative.svg');

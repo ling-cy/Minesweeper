@@ -5,7 +5,7 @@ const CounterNumber = ({ value, usage }: { value: number; usage: string }) => {
   const str = React.useMemo(() => {
     let num: number;
     if (!!value && typeof value === 'number') {
-      num = value > 999 ? 999 : value;
+      num = value <= 999 ? (value > -100 ? value : -99) : 999;
     } else {
       num = 0;
     }
@@ -14,8 +14,15 @@ const CounterNumber = ({ value, usage }: { value: number; usage: string }) => {
 
   const strArray = React.useMemo(() => {
     const defaultArr = str.split('');
-    const zeroArr = Array.from({ length: 3 - defaultArr.length }, _ => '0');
-    return [...zeroArr, ...defaultArr];
+    if (value < 0) {
+      if (value > -10) {
+        defaultArr.splice(1, 0, '0');
+      }
+      return defaultArr;
+    } else {
+      const zeroArr = Array.from({ length: 3 - defaultArr.length }, _ => '0');
+      return [...zeroArr, ...defaultArr];
+    }
   }, [str]);
 
   const path = React.useCallback(
@@ -41,6 +48,8 @@ const CounterNumber = ({ value, usage }: { value: number; usage: string }) => {
           return CounterNumberImages.Nine;
         case '0':
           return CounterNumberImages.Zero;
+        case '-':
+          return CounterNumberImages.Negative;
       }
     },
     [value],
