@@ -31,7 +31,7 @@ export const GameContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [difficulty, setDifficulty] = React.useState(DIFFICULTY.INTERMEDIATE);
+  const [difficulty, setDifficulty] = React.useState(DIFFICULTY.EASY);
   const { width, height, mine: mineNumber } = difficulty;
   const [gameField, setGameField] = React.useState(
     generateField(width * height, mineNumber, width),
@@ -42,9 +42,6 @@ export const GameContextProvider = ({
       width,
       Array.from({ length: width * height }, _ => FieldStatus.Untouched),
     ),
-  );
-  const [flagged, setFlagged] = React.useState<{ row: number; col: number }[]>(
-    [],
   );
   const [flaggedNumber, setFlaggedNumber] = React.useState(0);
 
@@ -79,9 +76,17 @@ export const GameContextProvider = ({
   };
 
   const allFlagged =
-    flagged.length === mineNumber &&
-    flagged.reduce((allCorrect, flaggedSq) => {
-      return allCorrect && gameField[flaggedSq.row][flaggedSq.col] === -1;
+    flaggedNumber === mineNumber &&
+    fieldStatus.reduce((prev, curr, row) => {
+      return (
+        prev &&
+        curr.reduce((rowPrev, rowCurr, col) => {
+          const flaggedMine =
+            (rowCurr !== FieldStatus.Flagged && gameField[row][col] !== -1) ||
+            (rowCurr === FieldStatus.Flagged && gameField[row][col] === -1);
+          return rowPrev && flaggedMine;
+        }, true)
+      );
     }, true);
 
   const allDodged =

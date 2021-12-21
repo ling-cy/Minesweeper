@@ -21,7 +21,7 @@ const MineButton = ({
 }) => {
   const content = React.useMemo(() => {
     if (flagged) {
-      return <img src={Flag} style={{ width: '24px', height: '24px' }} />;
+      return <img src={Flag} style={{ width: '28px', height: '28px' }} />;
     }
     if (revealed) {
       switch (num) {
@@ -55,8 +55,8 @@ const MineButton = ({
     <button
       style={{
         display: 'flex',
-        width: '36px',
-        height: '36px',
+        width: '34px',
+        height: '34px',
         alignItems: 'center',
         justifyContent: 'center',
         borderStyle: revealed ? 'outset' : 'solid',
@@ -68,9 +68,7 @@ const MineButton = ({
         borderLeftColor: revealed ? 'rgb(125,125,125)' : 'white',
         borderBottomColor: 'rgb(125,125,125)',
         borderRightColor: 'rgb(125,125,125)',
-        color: 'black',
         backgroundColor: last ? 'rgb(234,51,35)' : 'rgb(198,198,198)',
-        fontSize: '24px',
       }}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
