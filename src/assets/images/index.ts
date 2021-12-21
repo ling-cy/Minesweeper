@@ -1,4 +1,5 @@
 import * as MineNumberImages from './mineNumbers';
-export { MineNumberImages };
+import * as CounterNumberImages from './CounterNumbers';
 export const Mine = require('./mine.svg');
 export const Flag = require('./flag.svg');
+export { MineNumberImages, CounterNumberImages };
