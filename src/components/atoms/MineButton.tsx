@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mine, Flag } from '@assets/images';
+import MineNumber from './MineNumber';
 
 const MineButton = ({
   num,
@@ -25,11 +26,11 @@ const MineButton = ({
     if (revealed) {
       switch (num) {
         case -1:
-          return <img src={Mine} style={{ width: '26px', height: '26px' }} />;
+          return <img src={Mine} style={{ width: '30px', height: '30px' }} />;
         case 0:
           return;
         default:
-          return <span>{`${num}`}</span>;
+          return <MineNumber value={num} />;
       }
     }
     return;

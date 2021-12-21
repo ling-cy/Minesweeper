@@ -28,5 +28,11 @@ const MineNumber = ({ value }: { value: number }) => {
     return null;
   }, [value]);
 
-  return <div>{!!path && <img src={path} />}</div>;
+  return (
+    <>
+      {!!path && <img src={path} style={{ width: '30px', height: '30px' }} />}
+    </>
+  );
 };
+
+export default MineNumber;
