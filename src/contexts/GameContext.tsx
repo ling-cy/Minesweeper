@@ -102,6 +102,9 @@ export const GameContextProvider = ({
   }, [allFlagged, allDodged]);
 
   const setFlag = (row: number, col: number) => {
+    if (gameStatus === GameStatus.Pending) {
+      setGameStatus(GameStatus.Started);
+    }
     if (
       gameStatus === GameStatus.Pending ||
       gameStatus === GameStatus.Started

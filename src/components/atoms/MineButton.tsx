@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mine } from '@assets/images';
+import { Mine, Flag } from '@assets/images';
 
 const MineButton = ({
   num,
@@ -19,12 +19,10 @@ const MineButton = ({
   last: boolean;
 }) => {
   const content = React.useMemo(() => {
-    if (!revealed) {
-      if (flagged) {
-        return <span>%</span>;
-      }
-      return;
-    } else {
+    if (flagged) {
+      return <img src={Flag} style={{ width: '24px', height: '24px' }} />;
+    }
+    if (revealed) {
       switch (num) {
         case -1:
           return <img src={Mine} style={{ width: '26px', height: '26px' }} />;
@@ -34,7 +32,8 @@ const MineButton = ({
           return <span>{`${num}`}</span>;
       }
     }
-  }, [num, revealed]);
+    return;
+  }, [num, revealed, flagged]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e.button === 0) {
@@ -69,7 +68,7 @@ const MineButton = ({
         borderBottomColor: 'rgb(125,125,125)',
         borderRightColor: 'rgb(125,125,125)',
         color: 'black',
-        backgroundColor: flagged ? 'green' : last ? 'red' : 'rgb(198,198,198)',
+        backgroundColor: last ? 'rgb(234,51,35)' : 'rgb(198,198,198)',
         fontSize: '24px',
       }}
       onClick={handleClick}
