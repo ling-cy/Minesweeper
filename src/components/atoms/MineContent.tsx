@@ -1,18 +1,26 @@
 import React from 'react';
-import { Mine, Flag } from '@assets/images';
+import { Mine, Flag, WrongMine } from '@assets/images';
 import MineNumber from './MineNumber';
+import { GameStatus } from '@constants/game';
 
 const MineContent = ({
   num,
   revealed,
   flagged,
+  gameStatus,
 }: {
   num: number;
   revealed: boolean;
   flagged: boolean;
+  gameStatus: GameStatus;
 }) => {
   const content = React.useMemo(() => {
     if (flagged) {
+      if (num !== -1 && gameStatus === GameStatus.Lost) {
+        return (
+          <img src={WrongMine} style={{ width: '28px', height: '28px' }} />
+        );
+      }
       return <img src={Flag} style={{ width: '28px', height: '28px' }} />;
     }
     if (revealed) {
@@ -26,7 +34,7 @@ const MineContent = ({
       }
     }
     return <></>;
-  }, [num, revealed, flagged]);
+  }, [num, revealed, flagged, gameStatus]);
 
   return content;
 };

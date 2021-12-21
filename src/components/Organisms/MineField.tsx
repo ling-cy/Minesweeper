@@ -46,6 +46,7 @@ const MineField = ({
                   onReveal={() => onReveal(rowId, colId)}
                   onFlag={() => onFlag(rowId, colId)}
                   disabled={disabled}
+                  gameStatus={gameStatus}
                 />
               );
             })}
