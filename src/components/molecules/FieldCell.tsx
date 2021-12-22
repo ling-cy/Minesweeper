@@ -1,7 +1,7 @@
 import { GameStatus } from '@constants/game';
 import React from 'react';
-import MineButton from '../atoms/MineButton';
-import MineContent from '../atoms/MineContent';
+import FieldButton from '../atoms/FieldButton';
+import FieldContent from '../atoms/FieldContent';
 
 const FieldSuare = ({
   num,
@@ -23,7 +23,7 @@ const FieldSuare = ({
   gameStatus: GameStatus;
 }) => {
   return (
-    <MineButton
+    <FieldButton
       revealed={
         flagged ? gameStatus === GameStatus.Lost && num !== -1 : revealed
       }
@@ -32,13 +32,13 @@ const FieldSuare = ({
       disabled={disabled}
       last={last}
     >
-      <MineContent
+      <FieldContent
         num={num}
         revealed={revealed}
         flagged={flagged}
         gameStatus={gameStatus}
       />
-    </MineButton>
+    </FieldButton>
   );
 };
 

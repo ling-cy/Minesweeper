@@ -1,5 +1,5 @@
 import React from 'react';
-import FieldSuare from '../molecules/FieldSquare';
+import FieldCell from '../molecules/FieldCell';
 import { FieldStatus, GameStatus } from '@constants/game';
 
 const MineField = ({
@@ -37,7 +37,7 @@ const MineField = ({
               const disabled =
                 gameStatus === GameStatus.Lost || gameStatus === GameStatus.Won;
               return (
-                <FieldSuare
+                <FieldCell
                   num={fieldNum}
                   key={`${rowId}-${colId}`}
                   revealed={revealed}
