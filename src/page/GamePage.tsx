@@ -4,24 +4,31 @@ import { useGameContext } from '@contexts/GameContext';
 import Timer from '@components/molecules/Timer';
 import CounterNumber from '@components/atoms/CounterNumber';
 import Face from '@components/atoms/Face';
+import GameWindow from '@components/templates/GameWindow';
 
 const GamePage = () => {
   const { gameField, fieldStatus, setReveal, gameStatus, setFlag, mineLeft } =
     useGameContext();
   return (
-    <>
-      <MineField
-        gameField={gameField}
-        fieldStatus={fieldStatus}
-        onReveal={setReveal}
-        onFlag={setFlag}
-        gameStatus={gameStatus}
-      />
-      <Face gameStatus={gameStatus} />
-      <Timer gameStatus={gameStatus} />
-      <h4>Mine left:</h4>
-      <CounterNumber value={mineLeft} usage="mineCounter" />
-    </>
+    <GameWindow
+      settingBar={<></>}
+      gamePanel={
+        <>
+          <CounterNumber value={mineLeft} usage="mineCounter" />
+          <Face gameStatus={gameStatus} />
+          <Timer gameStatus={gameStatus} />
+        </>
+      }
+      gameField={
+        <MineField
+          gameField={gameField}
+          fieldStatus={fieldStatus}
+          onReveal={setReveal}
+          onFlag={setFlag}
+          gameStatus={gameStatus}
+        />
+      }
+    />
   );
 };
 

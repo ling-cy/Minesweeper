@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FieldSuare = ({
+const FieldButton = ({
   revealed,
   onReveal,
   onFlag,
@@ -38,7 +38,7 @@ const FieldSuare = ({
         height: '34px',
         alignItems: 'center',
         justifyContent: 'center',
-        borderStyle: revealed ? 'outset' : 'solid',
+        borderStyle: 'solid',
         borderTopWidth: revealed ? '2px' : '4px',
         borderLeftWidth: revealed ? '2px' : '4px',
         borderBottomWidth: revealed ? '0px' : '4px',
@@ -58,4 +58,4 @@ const FieldSuare = ({
   );
 };
 
-export default FieldSuare;
+export default FieldButton;

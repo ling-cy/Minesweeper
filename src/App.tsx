@@ -1,11 +1,11 @@
 import React from 'react';
 import { GameContextProvider } from '@contexts/GameContext';
 import GamePage from '@page/GamePage';
+import './App.css';
 
 const App = () => {
   return (
     <GameContextProvider>
-      <h1>Minesweeper</h1>
       <GamePage />
     </GameContextProvider>
   );
