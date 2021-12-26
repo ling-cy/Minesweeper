@@ -1,6 +1,48 @@
 import Typography from '@components/atoms/Typography';
 import WindowTopBar from '@components/molecules/WindowTopBar';
+import styled from 'styled-components';
 import React from 'react';
+import { BG_GREY, SHADOW_GREY, WHITE, BLACK } from '@styles/palette';
+
+const StyledGameWindowWrapper = styled.div`
+  background-color: ${BG_GREY};
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 350px;
+  min-height: 500px;
+  border-style: outset;
+  border-width: 2px;
+  border-color: ${WHITE} ${BLACK} ${BLACK} ${WHITE};
+  padding: 3px;
+`;
+
+const StyledGameAreaWrapper = styled.div`
+  background-color: ${BG_GREY};
+  display: inline-flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 6px;
+  border-color: ${WHITE} ${SHADOW_GREY} ${SHADOW_GREY} ${WHITE};
+  padding: 14px;
+`;
+
+const StyledGamePanelWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 4px;
+  border-color: ${SHADOW_GREY} ${WHITE} ${WHITE} ${SHADOW_GREY};
+  padding: 8px 8px;
+`;
+
+const StyledGameFieldWrapper = styled.div`
+  border-style: solid;
+  border-width: 6px;
+  border-color: ${SHADOW_GREY} ${WHITE} ${WHITE} ${SHADOW_GREY};
+  margin-top: 14px;
+`;
 
 const GameWindow = ({
   settingBar,
@@ -12,71 +54,15 @@ const GameWindow = ({
   gameField: React.ReactNode;
 }) => {
   return (
-    <div
-      style={{
-        backgroundColor: 'rgb(198, 198, 198)',
-        display: 'inline-flex',
-        flexDirection: 'column',
-        minWidth: '350px',
-        minHeight: '500px',
-        borderStyle: 'outset',
-        borderWidth: '2px',
-        borderTopColor: 'white',
-        borderLeftColor: 'white',
-        borderBottomColor: 'black',
-        borderRightColor: 'black',
-        padding: '3px',
-      }}
-    >
+    <StyledGameWindowWrapper>
       <WindowTopBar />
       <Typography>Game</Typography>
       <div>{settingBar}</div>
-      <div
-        style={{
-          backgroundColor: 'rgb(198, 198, 198)',
-          display: 'inline-flex',
-          flexDirection: 'column',
-          borderStyle: 'solid',
-          borderWidth: '6px',
-          borderTopColor: 'white',
-          borderLeftColor: 'white',
-          borderBottomColor: 'rgb(125,125,125)',
-          borderRightColor: 'rgb(125,125,125)',
-          padding: '14px',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderStyle: 'solid',
-            borderWidth: '4px',
-            borderTopColor: 'rgb(125,125,125)',
-            borderLeftColor: 'rgb(125,125,125)',
-            borderBottomColor: 'white',
-            borderRightColor: 'white',
-            padding: '8px 8px',
-          }}
-        >
-          {gamePanel}
-        </div>
-        <div
-          style={{
-            borderStyle: 'solid',
-            borderWidth: '6px',
-            borderTopColor: 'rgb(125,125,125)',
-            borderLeftColor: 'rgb(125,125,125)',
-            borderBottomColor: 'white',
-            borderRightColor: 'white',
-            marginTop: '14px',
-          }}
-        >
-          {gameField}
-        </div>
-      </div>
-    </div>
+      <StyledGameAreaWrapper>
+        <StyledGamePanelWrapper>{gamePanel}</StyledGamePanelWrapper>
+        <StyledGameFieldWrapper>{gameField}</StyledGameFieldWrapper>
+      </StyledGameAreaWrapper>
+    </StyledGameWindowWrapper>
   );
 };
 
