@@ -1,3 +1,4 @@
+import Typography from '@components/atoms/Typography';
 import WindowTopBar from '@components/molecules/WindowTopBar';
 import React from 'react';
 
@@ -28,6 +29,7 @@ const GameWindow = ({
       }}
     >
       <WindowTopBar />
+      <Typography>Game</Typography>
       <div>{settingBar}</div>
       <div
         style={{
