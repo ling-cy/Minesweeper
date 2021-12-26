@@ -1,4 +1,23 @@
+@font-face {
+  font-family: w95fa;
+  src: url('./assets/fonts/w95fa.woff') format('woff');
+}
+
+@font-face {
+  font-family: ms-sans-serif-bold;
+  src: url('./assets/fonts/ms-sans-serif-bold.ttf') format('truetype');
+}
+
 body {
-  font-family: sans-serif;
+  font-family: w95fa;
   background-color: rgb(116, 175, 175);
+}
+
+.topBarFont {
+  font-family: ms-sans-serif-bold;
+  /* display: inline-block; */
+  color: white;
+  font-size: 22px;
+  letter-spacing: 0.09rem;
+  transform: scale(0.85, 1);
 }

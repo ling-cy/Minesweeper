@@ -1,3 +1,4 @@
+import WindowTopBar from '@components/molecules/WindowTopBar';
 import React from 'react';
 
 const GameWindow = ({
@@ -14,6 +15,7 @@ const GameWindow = ({
       style={{
         backgroundColor: 'rgb(198, 198, 198)',
         display: 'inline-flex',
+        flexDirection: 'column',
         minWidth: '350px',
         minHeight: '500px',
         borderStyle: 'outset',
@@ -25,7 +27,7 @@ const GameWindow = ({
         padding: '3px',
       }}
     >
-      <div></div>
+      <WindowTopBar />
       <div>{settingBar}</div>
       <div
         style={{
@@ -38,7 +40,7 @@ const GameWindow = ({
           borderLeftColor: 'white',
           borderBottomColor: 'rgb(125,125,125)',
           borderRightColor: 'rgb(125,125,125)',
-          padding: '17px',
+          padding: '14px',
         }}
       >
         <div
@@ -66,6 +68,7 @@ const GameWindow = ({
             borderLeftColor: 'rgb(125,125,125)',
             borderBottomColor: 'white',
             borderRightColor: 'white',
+            marginTop: '14px',
           }}
         >
           {gameField}

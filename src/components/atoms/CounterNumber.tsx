@@ -66,14 +66,10 @@ const CounterNumber = ({ value, usage }: { value: number; usage: string }) => {
       }}
     >
       {strArray.map((num, idx) => (
-        <>
+        <React.Fragment key={`${usage}-${idx}`}>
           {idx !== 0 && <div style={{ width: '2px', height: '46px' }} />}
-          <img
-            key={`${usage}-${idx}`}
-            src={path(num)}
-            style={{ width: '26px', height: '46px' }}
-          />
-        </>
+          <img src={path(num)} style={{ width: '26px', height: '46px' }} />
+        </React.Fragment>
       ))}
     </div>
   );
