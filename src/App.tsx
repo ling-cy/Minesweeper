@@ -1,7 +1,7 @@
 import React from 'react';
 import { GameContextProvider } from '@contexts/GameContext';
 import GamePage from '@page/GamePage';
-import './App.css';
+import './styles/App.css';
 
 const App = () => {
   return (

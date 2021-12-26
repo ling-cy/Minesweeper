@@ -19,6 +19,7 @@ module.exports = {
       '@types': path.resolve(__dirname, './src/types/'),
       '@page': path.resolve(__dirname, './src/page/'),
       '@assets': path.resolve(__dirname, './src/assets/'),
+      '@styles': path.resolve(__dirname, './src/styles/'),
     },
     extensions: ['.ts', '.tsx', '.js', '.json'],
   },
