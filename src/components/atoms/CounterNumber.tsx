@@ -1,5 +1,25 @@
 import React from 'react';
 import { CounterNumberImages } from '@assets/images';
+import styled from 'styled-components';
+import { BLACK } from '@styles/palette';
+
+const Separator = styled.div`
+  width: 2px;
+  height: 46px;
+`;
+
+const StyledImg = styled.img`
+  width: 26px;
+  height: 46px;
+`;
+
+const StyledCounterNumberWrapper = styled.div`
+  width: 82px;
+  height: 46px;
+  display: flex;
+  flex-direction: row;
+  background-color: ${BLACK};
+`;
 
 const CounterNumber = ({ value, usage }: { value: number; usage: string }) => {
   const str = React.useMemo(() => {
@@ -56,22 +76,14 @@ const CounterNumber = ({ value, usage }: { value: number; usage: string }) => {
   );
 
   return (
-    <div
-      style={{
-        width: '82px',
-        height: '46px',
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: 'black',
-      }}
-    >
+    <StyledCounterNumberWrapper>
       {strArray.map((num, idx) => (
         <React.Fragment key={`${usage}-${idx}`}>
-          {idx !== 0 && <div style={{ width: '2px', height: '46px' }} />}
-          <img src={path(num)} style={{ width: '26px', height: '46px' }} />
+          {idx !== 0 && <Separator />}
+          <StyledImg src={path(num)} />
         </React.Fragment>
       ))}
-    </div>
+    </StyledCounterNumberWrapper>
   );
 };
 

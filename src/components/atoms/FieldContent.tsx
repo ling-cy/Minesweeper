@@ -2,6 +2,12 @@ import React from 'react';
 import { Mine, Flag, WrongMine } from '@assets/images';
 import MineNumber from './MineNumber';
 import { GameStatus } from '@constants/game';
+import styled from 'styled-components';
+
+const StyledImg = styled.img<{ sideWidth: number }>`
+  width: ${props => `${props.sideWidth}px`};
+  height: ${props => `${props.sideWidth}px`};
+`;
 
 const MineContent = ({
   num,
@@ -17,16 +23,14 @@ const MineContent = ({
   const content = React.useMemo(() => {
     if (flagged) {
       if (num !== -1 && gameStatus === GameStatus.Lost) {
-        return (
-          <img src={WrongMine} style={{ width: '28px', height: '28px' }} />
-        );
+        return <StyledImg src={WrongMine} sideWidth={28} />;
       }
-      return <img src={Flag} style={{ width: '28px', height: '28px' }} />;
+      return <StyledImg src={Flag} sideWidth={28} />;
     }
     if (revealed) {
       switch (num) {
         case -1:
-          return <img src={Mine} style={{ width: '30px', height: '30px' }} />;
+          return <StyledImg src={Mine} sideWidth={30} />;
         case 0:
           return <></>;
         default:

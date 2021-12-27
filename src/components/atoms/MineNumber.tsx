@@ -1,5 +1,11 @@
 import React from 'react';
 import { MineNumberImages } from '@assets/images';
+import styled from 'styled-components';
+
+const StyledImg = styled.img`
+  width: 30px;
+  height: 30px;
+`;
 
 const MineNumber = ({ value }: { value: number }) => {
   const path = React.useMemo(() => {
@@ -28,11 +34,7 @@ const MineNumber = ({ value }: { value: number }) => {
     return null;
   }, [value]);
 
-  return (
-    <>
-      {!!path && <img src={path} style={{ width: '30px', height: '30px' }} />}
-    </>
-  );
+  return <>{!!path && <StyledImg src={path} />}</>;
 };
 
 export default MineNumber;

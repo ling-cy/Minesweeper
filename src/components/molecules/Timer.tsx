@@ -20,11 +20,7 @@ const Timer = ({ gameStatus }: { gameStatus: GameStatus }) => {
     }
   }, [time, stop, gameStatus]);
 
-  return (
-    <div>
-      <CounterNumber value={time} usage="timer" />
-    </div>
-  );
+  return <CounterNumber value={time} usage="timer" />;
 };
 
 export default Timer;

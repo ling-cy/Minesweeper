@@ -1,6 +1,12 @@
 import { FaceImages } from '@assets/images';
 import { GameStatus } from '@constants/game';
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledImg = styled.img`
+  width: 34px;
+  height: 34px;
+`;
 
 const Face = ({ gameStatus }: { gameStatus: GameStatus }) => {
   const path = React.useMemo(() => {
@@ -14,7 +20,7 @@ const Face = ({ gameStatus }: { gameStatus: GameStatus }) => {
     }
   }, [gameStatus]);
 
-  return <img src={path} style={{ width: '34px', height: '34px' }} />;
+  return <StyledImg src={path} />;
 };
 
 export default Face;
