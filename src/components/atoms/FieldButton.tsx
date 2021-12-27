@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { BG_GREY, SHADOW_GREY, WHITE, RED } from '@styles/palette';
 
-const StyledFieldButton = styled.button<FieldButtonType>`
+const StyledFieldButton = styled.button<
+  Pick<FieldButtonType, 'revealed' | 'last'>
+>`
   width: 34px;
   height: 34px;
   display: flex;
@@ -31,7 +33,7 @@ type FieldButtonType = {
 };
 
 const FieldButton = (props: FieldButtonType) => {
-  const { onReveal, onFlag, disabled, children } = props;
+  const { onReveal, onFlag, disabled, children, ...otherProps } = props;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e.button === 0) {
       onReveal();
@@ -49,7 +51,7 @@ const FieldButton = (props: FieldButtonType) => {
 
   return (
     <StyledFieldButton
-      {...props}
+      {...otherProps}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
       disabled={disabled}
