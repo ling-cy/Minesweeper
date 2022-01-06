@@ -27,6 +27,7 @@ const FieldSuare = ({
       revealed={
         flagged ? gameStatus === GameStatus.Lost && num !== -1 : revealed
       }
+      flagged={flagged}
       onReveal={onReveal}
       onFlag={onFlag}
       disabled={disabled}

@@ -2,13 +2,18 @@ import { MinesweeperLogo } from '@assets/images';
 import styled from 'styled-components';
 import React from 'react';
 import { BLUE } from '@styles/palette';
+import WindowButton from '@components/atoms/WindowButton';
+import { ButtonType } from '@constants/components';
+import Separator from '@components/atoms/Separator';
 
-const StyledWIndowTopBarWrapper = styled.div`
+const StyledWindowTopBarWrapper = styled.div`
   background-color: ${BLUE};
   height: 36px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 0px 4px;
+  justify-content: space-between;
 `;
 
 const StyledRightBarWrapper = styled.div`
@@ -16,7 +21,6 @@ const StyledRightBarWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin-left: 4px;
 `;
 
 const StyledLogo = styled.img`
@@ -35,15 +39,28 @@ const StyledWindowName = styled.div`
   }
 `;
 
+const StyledLeftBarWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1px 0px 0px;
+`;
+
 const WindowTopBar = () => {
   return (
-    <StyledWIndowTopBarWrapper>
+    <StyledWindowTopBarWrapper>
       <StyledRightBarWrapper>
         <StyledLogo src={MinesweeperLogo} />
         <StyledWindowName>Minesweeper</StyledWindowName>
       </StyledRightBarWrapper>
-      <div></div>
-    </StyledWIndowTopBarWrapper>
+      <StyledLeftBarWrapper>
+        <WindowButton type={ButtonType.Minimize} />
+        <WindowButton type={ButtonType.Resize} disabled />
+        <Separator x={4} />
+        <WindowButton type={ButtonType.Close} />
+      </StyledLeftBarWrapper>
+    </StyledWindowTopBarWrapper>
   );
 };
 

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { BG_GREY, SHADOW_GREY, WHITE, RED } from '@styles/palette';
 
-const StyledFieldButton = styled.button<
-  Pick<FieldButtonType, 'revealed' | 'last'>
+export const StyledFieldButton = styled.button<
+  Pick<FieldButtonType, 'revealed' | 'last' | 'flagged'>
 >`
   width: 34px;
   height: 34px;
@@ -17,23 +17,26 @@ const StyledFieldButton = styled.button<
       ? SHADOW_GREY
       : `${WHITE} ${SHADOW_GREY} ${SHADOW_GREY} ${WHITE}`};
   background-color: ${props => (props.last ? RED : BG_GREY)};
-  &:active {
+  ${props =>
+    !props.flagged &&
+    `&:active {
     border-width: 2px 0px 0px 2px;
     border-color: ${SHADOW_GREY};
-  }
+  }`}
 `;
 
 type FieldButtonType = {
   revealed: boolean;
   onReveal: () => void;
   onFlag: () => void;
+  flagged: boolean;
   disabled: boolean;
   last: boolean;
   children?: React.ReactNode;
 };
 
 const FieldButton = (props: FieldButtonType) => {
-  const { onReveal, onFlag, disabled, children, ...otherProps } = props;
+  const { onReveal, onFlag, children, ...otherProps } = props;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e.button === 0) {
       onReveal();
@@ -54,7 +57,6 @@ const FieldButton = (props: FieldButtonType) => {
       {...otherProps}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
-      disabled={disabled}
     >
       {children}
     </StyledFieldButton>
