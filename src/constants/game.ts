@@ -1,4 +1,4 @@
-const EASY = {
+const BEGINNER = {
   width: 10,
   height: 10,
   mine: 10,
@@ -16,7 +16,7 @@ const EXPERT = {
   mine: 99,
 };
 
-export const DIFFICULTY = { EASY, INTERMEDIATE, EXPERT };
+export const DIFFICULTY = { BEGINNER, INTERMEDIATE, EXPERT };
 
 export enum GameStatus {
   Pending = 'PENDING',

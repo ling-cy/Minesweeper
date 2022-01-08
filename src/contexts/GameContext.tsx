@@ -32,7 +32,7 @@ export const GameContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [difficulty, setDifficulty] = React.useState(DIFFICULTY.EASY);
+  const [difficulty, setDifficulty] = React.useState(DIFFICULTY.BEGINNER);
   const { width, height, mine: mineNumber } = difficulty;
   const [gameField, setGameField] = React.useState(
     generateField(width * height, mineNumber, width),

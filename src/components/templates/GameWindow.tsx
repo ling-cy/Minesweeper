@@ -15,7 +15,7 @@ const StyledGameWindowWrapper = styled.div`
   padding: 3px;
 `;
 
-const StyledSettingBarWrapper = styled.div`
+const StyledDropdownBarWrapper = styled.div`
   height: 40px;
   display: flex;
   flex-direction: row;
@@ -63,7 +63,7 @@ const GameWindow = ({
   return (
     <StyledGameWindowWrapper>
       <WindowTopBar />
-      <StyledSettingBarWrapper>{settingBar}</StyledSettingBarWrapper>
+      <StyledDropdownBarWrapper>{settingBar}</StyledDropdownBarWrapper>
       <StyledGameAreaWrapper>
         <StyledGamePanelWrapper>{gamePanel}</StyledGamePanelWrapper>
         <StyledGameFieldWrapper>{gameField}</StyledGameFieldWrapper>

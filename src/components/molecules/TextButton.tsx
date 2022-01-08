@@ -3,13 +3,13 @@ import { BG_GREY, BLUE, SHADOW_GREY, WHITE } from '@styles/palette';
 import React from 'react';
 import styled from 'styled-components';
 
-const BottomRightWrapper = styled.div<{ menu?: boolean; pressed: boolean }>`
+const BottomRightWrapper = styled.div<{ menu?: boolean; pressed?: boolean }>`
   border-width: 0px 2px 2px 0px;
   border-color: ${props => (!props.menu && props.pressed ? WHITE : BG_GREY)};
   border-style: solid;
 `;
 
-const StyledTextButton = styled.div<{ menu?: boolean; pressed: boolean }>`
+const StyledTextButton = styled.div<{ menu?: boolean; pressed?: boolean }>`
   height: ${props => (props.menu ? 34 : 32)}px;
   display: flex;
   flex-direction: row;
@@ -37,26 +37,32 @@ const TextButton = ({
   secondaryText,
   menu,
   pressdownable,
-  onClickCallbacks,
+  onClick,
+  pressed,
+  className,
 }: {
   text?: string;
   secondaryText?: string;
   menu?: boolean;
   pressdownable?: boolean;
-  onClickCallbacks?: () => void;
+  onClick?: () => void;
+  pressed?: boolean;
+  className?: string;
 }) => {
-  const [pressed, setPressed] = React.useState(false);
-
   const handleClick = () => {
-    if (pressdownable) {
-      setPressed(!pressed);
-    }
-    if (!!onClickCallbacks) onClickCallbacks();
+    if (!!onClick) onClick();
   };
   return (
-    <BottomRightWrapper onClick={handleClick} menu={menu} pressed={pressed}>
-      <StyledTextButton menu={menu} pressed={pressed}>
-        <StyledButtonTypography>{text || ''}</StyledButtonTypography>
+    <BottomRightWrapper
+      className={className}
+      onClick={handleClick}
+      menu={menu}
+      pressed={pressed}
+    >
+      <StyledTextButton className={className} menu={menu} pressed={pressed}>
+        <StyledButtonTypography className={className}>
+          {text || ''}
+        </StyledButtonTypography>
       </StyledTextButton>
     </BottomRightWrapper>
   );
