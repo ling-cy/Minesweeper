@@ -6,7 +6,7 @@ import { BG_GREY, SHADOW_GREY, WHITE, BLACK } from '@styles/palette';
 
 const StyledGameWindowWrapper = styled.div`
   background-color: ${BG_GREY};
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   min-width: 350px;
   min-height: 500px;
@@ -18,7 +18,7 @@ const StyledGameWindowWrapper = styled.div`
 
 const StyledGameAreaWrapper = styled.div`
   background-color: ${BG_GREY};
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   border-style: solid;
   border-width: 6px;
