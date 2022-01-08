@@ -18,6 +18,9 @@ const Timer = ({ gameStatus }: { gameStatus: GameStatus }) => {
     if (gameStatus === GameStatus.Won || gameStatus === GameStatus.Lost) {
       setStop(true);
     }
+    if (gameStatus === GameStatus.Pending && time !== 0) {
+      setTime(0);
+    }
   }, [time, stop, gameStatus]);
 
   return <CounterNumber value={time} usage="timer" />;

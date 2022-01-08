@@ -50,7 +50,6 @@ const Face = ({
         return FaceImages.SmileFace;
     }
   }, [gameStatus]);
-
   return (
     <StyledButton onClick={onClick}>
       <StyledImg src={path} />

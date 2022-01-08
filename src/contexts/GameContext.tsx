@@ -18,6 +18,7 @@ type GameContextValueType = {
   isLost: boolean;
   isWon: boolean;
   mineLeft: number;
+  restartGame: () => void;
 };
 
 export const GameContext = React.createContext<GameContextValueType>(
@@ -31,7 +32,7 @@ export const GameContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [difficulty, setDifficulty] = React.useState(DIFFICULTY.INTERMEDIATE);
+  const [difficulty, setDifficulty] = React.useState(DIFFICULTY.EASY);
   const { width, height, mine: mineNumber } = difficulty;
   const [gameField, setGameField] = React.useState(
     generateField(width * height, mineNumber, width),
@@ -100,12 +101,6 @@ export const GameContextProvider = ({
       );
     }, 0);
 
-  React.useEffect(() => {
-    if (gameStatus === GameStatus.Started && (allFlagged || allDodged)) {
-      setGameStatus(GameStatus.Won);
-    }
-  }, [allFlagged, allDodged]);
-
   const setFlag = (row: number, col: number) => {
     if (gameStatus === GameStatus.Pending) {
       setGameStatus(GameStatus.Started);
@@ -123,6 +118,25 @@ export const GameContextProvider = ({
       }
     }
   };
+
+  const restartGame = () => {
+    setGameStatus(GameStatus.Pending);
+    setFieldStatus(
+      splitEvery(
+        width,
+        Array.from({ length: width * height }, _ => FieldStatus.Untouched),
+      ),
+    );
+    setGameField(generateField(width * height, mineNumber, width));
+    setFlaggedNumber(0);
+  };
+
+  React.useEffect(() => {
+    if (gameStatus === GameStatus.Started && (allFlagged || allDodged)) {
+      setGameStatus(GameStatus.Won);
+    }
+  }, [allFlagged, allDodged]);
+
   return (
     <GameContext.Provider
       value={{
@@ -136,6 +150,7 @@ export const GameContextProvider = ({
         isLost,
         isWon,
         mineLeft: mineNumber - flaggedNumber,
+        restartGame,
       }}
     >
       {children}

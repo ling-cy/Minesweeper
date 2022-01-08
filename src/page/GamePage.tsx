@@ -5,17 +5,34 @@ import Timer from '@components/molecules/Timer';
 import CounterNumber from '@components/atoms/CounterNumber';
 import FaceButton from '@components/atoms/FaceButton';
 import GameWindow from '@components/templates/GameWindow';
+import { GameStatus } from '@constants/game';
 
 const GamePage = () => {
-  const { gameField, fieldStatus, setReveal, gameStatus, setFlag, mineLeft } =
-    useGameContext();
+  const {
+    gameField,
+    fieldStatus,
+    setReveal,
+    gameStatus,
+    setFlag,
+    mineLeft,
+    restartGame,
+  } = useGameContext();
+
+  const handleFaceButtonOnClick = () => {
+    if (gameStatus === GameStatus.Lost || gameStatus === GameStatus.Won) {
+      restartGame();
+    }
+  };
   return (
     <GameWindow
       settingBar={<></>}
       gamePanel={
         <>
           <CounterNumber value={mineLeft} usage="mineCounter" />
-          <FaceButton gameStatus={gameStatus} />
+          <FaceButton
+            gameStatus={gameStatus}
+            onClick={handleFaceButtonOnClick}
+          />
           <Timer gameStatus={gameStatus} />
         </>
       }
