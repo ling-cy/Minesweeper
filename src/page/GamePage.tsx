@@ -3,7 +3,7 @@ import MineField from '@components/organisms/MineField';
 import { useGameContext } from '@contexts/GameContext';
 import Timer from '@components/molecules/Timer';
 import CounterNumber from '@components/atoms/CounterNumber';
-import Face from '@components/atoms/Face';
+import FaceButton from '@components/atoms/FaceButton';
 import GameWindow from '@components/templates/GameWindow';
 
 const GamePage = () => {
@@ -15,7 +15,7 @@ const GamePage = () => {
       gamePanel={
         <>
           <CounterNumber value={mineLeft} usage="mineCounter" />
-          <Face gameStatus={gameStatus} />
+          <FaceButton gameStatus={gameStatus} />
           <Timer gameStatus={gameStatus} />
         </>
       }
