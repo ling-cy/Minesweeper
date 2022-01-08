@@ -1,4 +1,3 @@
-import Typography from '@components/atoms/Typography';
 import WindowTopBar from '@components/molecules/WindowTopBar';
 import styled from 'styled-components';
 import React from 'react';
@@ -14,6 +13,14 @@ const StyledGameWindowWrapper = styled.div`
   border-width: 2px;
   border-color: ${WHITE} ${BLACK} ${BLACK} ${WHITE};
   padding: 3px;
+`;
+
+const StyledSettingBarWrapper = styled.div`
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
 const StyledGameAreaWrapper = styled.div`
@@ -56,8 +63,7 @@ const GameWindow = ({
   return (
     <StyledGameWindowWrapper>
       <WindowTopBar />
-      <Typography>Game</Typography>
-      <div>{settingBar}</div>
+      <StyledSettingBarWrapper>{settingBar}</StyledSettingBarWrapper>
       <StyledGameAreaWrapper>
         <StyledGamePanelWrapper>{gamePanel}</StyledGamePanelWrapper>
         <StyledGameFieldWrapper>{gameField}</StyledGameFieldWrapper>

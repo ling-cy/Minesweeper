@@ -4,8 +4,10 @@ import { useGameContext } from '@contexts/GameContext';
 import Timer from '@components/molecules/Timer';
 import CounterNumber from '@components/atoms/CounterNumber';
 import FaceButton from '@components/atoms/FaceButton';
+import Typography from '@components/atoms/Typography';
 import GameWindow from '@components/templates/GameWindow';
 import { GameStatus } from '@constants/game';
+import TextButton from '@components/molecules/TextButton';
 
 const GamePage = () => {
   const {
@@ -25,7 +27,12 @@ const GamePage = () => {
   };
   return (
     <GameWindow
-      settingBar={<></>}
+      settingBar={
+        <>
+          <TextButton text="Game" pressdownable />
+          <TextButton text="Help" pressdownable />
+        </>
+      }
       gamePanel={
         <>
           <CounterNumber value={mineLeft} usage="mineCounter" />

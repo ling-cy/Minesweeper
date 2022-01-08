@@ -1,13 +1,13 @@
 import { MinesweeperLogo } from '@assets/images';
 import styled from 'styled-components';
 import React from 'react';
-import { BLUE } from '@styles/palette';
+import { BLUE, LIGHT_BLUE } from '@styles/palette';
 import WindowButton from '@components/atoms/WindowButton';
 import { ButtonType } from '@constants/components';
 import Separator from '@components/atoms/Separator';
 
 const StyledWindowTopBarWrapper = styled.div`
-  background-color: ${BLUE};
+  background-image: linear-gradient(90deg, ${BLUE}, ${LIGHT_BLUE});
   height: 36px;
   display: flex;
   flex-direction: row;
