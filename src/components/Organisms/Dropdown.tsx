@@ -39,9 +39,11 @@ export type DropdownButton = {
 const Dropdown = ({
   className,
   dropdownButtons,
+  closeDrowdownFn,
 }: {
   className?: string;
   dropdownButtons: DropdownButton[][];
+  closeDrowdownFn: () => void;
 }) => {
   return (
     <StyledDropdownWrapper className={className}>
@@ -59,7 +61,10 @@ const Dropdown = ({
                         text={text}
                         menu
                         className={className}
-                        onClick={onClick}
+                        onClick={() => {
+                          !!onClick && onClick();
+                          closeDrowdownFn();
+                        }}
                       />
                     ))}
                   </React.Fragment>

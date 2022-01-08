@@ -10,11 +10,13 @@ const DropdownBar = ({
   onClick,
   pressedButton,
   buttons,
+  closeDrowdownFn,
 }: {
   className: string;
   onClick: (buttonName: string | null) => void;
   pressedButton: string | null;
   buttons: { buttonName: string; dropdownButtons: DropdownButton[][] }[];
+  closeDrowdownFn: () => void;
 }) => {
   return (
     <>
@@ -28,7 +30,11 @@ const DropdownBar = ({
             onClick={() => onClick(buttonName)}
           />
           {pressedButton === buttonName && (
-            <Dropdown className={className} dropdownButtons={dropdownButtons} />
+            <Dropdown
+              className={className}
+              dropdownButtons={dropdownButtons}
+              closeDrowdownFn={closeDrowdownFn}
+            />
           )}
         </StyledDropdownWrapper>
       ))}

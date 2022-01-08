@@ -137,6 +137,10 @@ export const GameContextProvider = ({
     }
   }, [allFlagged, allDodged]);
 
+  React.useEffect(() => {
+    restartGame();
+  }, [difficulty]);
+
   return (
     <GameContext.Provider
       value={{

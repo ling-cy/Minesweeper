@@ -7,22 +7,8 @@ import FaceButton from '@components/atoms/FaceButton';
 import GameWindow from '@components/templates/GameWindow';
 import { GameStatus } from '@constants/game';
 import DropdownBar from '@components/Organisms/DropdownBar';
-
-const gameDropdownButtons = [
-  [{ text: 'New' }],
-  [
-    { text: 'Beginner' },
-    { text: 'Intermediate' },
-    { text: 'Expert' },
-    { text: 'Custom' },
-  ],
-];
-const helpDropdownButtons = [[{ text: 'About' }]];
-
-const buttons = [
-  { buttonName: 'Game', dropdownButtons: gameDropdownButtons },
-  { buttonName: 'Help', dropdownButtons: helpDropdownButtons },
-];
+import { DropdownButton } from '@components/Organisms/Dropdown';
+import { DIFFICULTY } from '@constants/game';
 
 const DROPDOWN_CLASSNAME = 'dropdown';
 
@@ -35,11 +21,49 @@ const GamePage = () => {
     setFlag,
     mineLeft,
     restartGame,
+    setDifficulty,
   } = useGameContext();
 
   const [pressedDropdownButton, setPressedDropdownButton] = React.useState<
     string | null
   >(null);
+
+  const gameDropdownButtons: DropdownButton[][] = [
+    [
+      {
+        text: 'New',
+        onClick: () => restartGame(),
+      },
+    ],
+    [
+      {
+        text: 'Beginner',
+        onClick: () => setDifficulty(DIFFICULTY.BEGINNER),
+      },
+      {
+        text: 'Intermediate',
+        onClick: () => setDifficulty(DIFFICULTY.INTERMEDIATE),
+      },
+      {
+        text: 'Expert',
+        onClick: () => setDifficulty(DIFFICULTY.EXPERT),
+      },
+    ],
+  ];
+  const helpDropdownButtons: DropdownButton[][] = [
+    [
+      {
+        text: 'About',
+        onClick: () =>
+          window.open('https://github.com/ling-cy/Minesweeper', '_newtab'),
+      },
+    ],
+  ];
+
+  const buttons = [
+    { buttonName: 'Game', dropdownButtons: gameDropdownButtons },
+    { buttonName: 'Help', dropdownButtons: helpDropdownButtons },
+  ];
 
   const handleFaceButtonOnClick = () => {
     if (gameStatus === GameStatus.Lost || gameStatus === GameStatus.Won) {
@@ -74,6 +98,7 @@ const GamePage = () => {
           className={DROPDOWN_CLASSNAME}
           pressedButton={pressedDropdownButton}
           onClick={buttonName => handleDropdownBarBtnOnClick(buttonName)}
+          closeDrowdownFn={() => setPressedDropdownButton(null)}
           buttons={buttons}
         />
       }
