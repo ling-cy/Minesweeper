@@ -1,6 +1,6 @@
 {
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"],
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "scripts", "./src/**/*.stories.*"],
   "compilerOptions": {
     "esModuleInterop": true,
     "jsx": "react",
@@ -10,6 +10,20 @@
     "strict": true,
     "sourceMap": true,
     "target": "esnext",
-    "baseUrl": "./src"
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@contexts/*": ["contexts/*"],
+      "@constants/*": ["constants/*"],
+      "@util/*": ["util/*"],
+      "@types/*": ["types/*"],
+      "@page/*": ["page/*"],
+      "@assets/*": ["assets/*"],
+      "@styles/*": ["styles/*"]
+    }
   }
 }

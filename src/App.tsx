@@ -1,7 +1,14 @@
 import React from 'react';
+import { GameContextProvider } from '@contexts/GameContext';
+import GamePage from '@page/GamePage';
+import './styles/App.css';
 
 const App = () => {
-  return <h1>Minesweeper</h1>;
+  return (
+    <GameContextProvider>
+      <GamePage />
+    </GameContextProvider>
+  );
 };
 
 export default App;

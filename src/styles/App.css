@@ -1,0 +1,37 @@
+@font-face {
+  font-family: w95fa;
+  src: url('../assets/fonts/w95fa.woff') format('woff');
+}
+
+@font-face {
+  font-family: ms-sans-serif-bold;
+  src: url('../assets/fonts/ms-sans-serif-bold.ttf') format('truetype');
+}
+
+body {
+  font-family: w95fa;
+  background-color: rgb(116, 175, 175);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+img,
+div,
+button {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+}
