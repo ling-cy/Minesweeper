@@ -1,13 +1,13 @@
 import React from 'react';
-import MineField from '@components/organisms/MineField';
+import MineField from '@components/organism/MineField';
 import { useGameContext } from '@contexts/GameContext';
 import Timer from '@components/molecules/Timer';
 import CounterNumber from '@components/atoms/CounterNumber';
 import FaceButton from '@components/atoms/FaceButton';
 import GameWindow from '@components/templates/GameWindow';
 import { GameStatus } from '@constants/game';
-import DropdownBar from '@components/organisms/DropdownBar';
-import { DropdownButton } from '@components/organisms/Dropdown';
+import DropdownBar from '@components/organism/DropdownBar';
+import { DropdownButton } from '@components/organism/Dropdown';
 import { DIFFICULTY } from '@constants/game';
 
 const DROPDOWN_CLASSNAME = 'dropdown';
