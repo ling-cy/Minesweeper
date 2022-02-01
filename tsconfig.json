@@ -1,29 +1,31 @@
 {
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./src/**/*.tsx", "./src/**/*.ts"],
   "exclude": ["node_modules", "scripts", "./src/**/*.stories.*"],
   "compilerOptions": {
+    "outDir": "./public/",
     "esModuleInterop": true,
     "jsx": "react",
-    "module": "esnext",
+    "module": "es6",
     "moduleResolution": "node",
     "lib": ["dom", "esnext"],
     "strict": true,
     "sourceMap": true,
-    "target": "esnext",
+    "target": "es5",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "allowJs": true,
     "noImplicitAny": false,
-    "baseUrl": "./src",
+    "noResolve": false,
+    "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@contexts/*": ["contexts/*"],
-      "@constants/*": ["constants/*"],
-      "@util/*": ["util/*"],
-      "@types/*": ["types/*"],
-      "@page/*": ["page/*"],
-      "@assets/*": ["assets/*"],
-      "@styles/*": ["styles/*"]
+      "@components/*": ["src/components/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@constants/*": ["src/constants/*"],
+      "@util/*": ["src/util/*"],
+      "@types/*": ["src/types/*"],
+      "@page/*": ["src/page/*"],
+      "@assets/*": ["src/assets/*"],
+      "@styles/*": ["src/styles/*"]
     }
   }
 }

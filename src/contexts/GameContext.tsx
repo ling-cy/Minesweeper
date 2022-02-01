@@ -3,7 +3,7 @@ import { splitEvery } from '@util/splitEvery';
 import { DIFFICULTY, GameStatus, FieldStatus } from '@constants/game';
 import { generateField } from '@util/generateField';
 import { revealSides } from '@util/revealSides';
-import { GameDifficulty } from 'types/game';
+import { GameDifficulty } from '../types/game';
 
 // gameField: -1 = mine, 0 = no mine nearby, 1-8 = number of mine nearby
 
