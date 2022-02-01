@@ -2,6 +2,7 @@
   "include": ["./src/**/*", "./src/**/*.tsx", "./src/**/*.ts"],
   "exclude": ["node_modules", "scripts", "./src/**/*.stories.*"],
   "compilerOptions": {
+    "outDir": "./public/",
     "esModuleInterop": true,
     "jsx": "react",
     "module": "es6",
