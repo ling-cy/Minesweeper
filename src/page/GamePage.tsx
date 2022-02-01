@@ -6,8 +6,8 @@ import CounterNumber from '@components/atoms/CounterNumber';
 import FaceButton from '@components/atoms/FaceButton';
 import GameWindow from '@components/templates/GameWindow';
 import { GameStatus } from '@constants/game';
-import DropdownBar from '@components/Organisms/DropdownBar';
-import { DropdownButton } from '@components/Organisms/Dropdown';
+import DropdownBar from '@components/organisms/DropdownBar';
+import { DropdownButton } from '@components/organisms/Dropdown';
 import { DIFFICULTY } from '@constants/game';
 
 const DROPDOWN_CLASSNAME = 'dropdown';
